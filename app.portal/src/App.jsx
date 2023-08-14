@@ -1,15 +1,9 @@
-import { 
-  BrowserRouter, 
-  Route, 
-  Switch,
-  NavLink,
- } from 'react-router-dom/cjs/react-router-dom.min';
+import { BrowserRouter, NavLink, Route, Switch} from 'react-router-dom';
 import './App.css';
-
-//import { MyApps } from './components/myapps/MyApps';
 import About from './components/about';
 import Contact from './components/contact';
-import Posts from './components/posts';
+import Posts from './components/posts/Posts.jsx'
+import AppContainer from './components/AppContainer';
 
 
 function App() {
@@ -24,9 +18,9 @@ function App() {
     <ul className='nav-bar'>
       
       
-      {/*<li>
+      <li>
         <NavLink activeClassName="active" to='/myApps' >My apps</NavLink>
- </li>*/}
+ </li>
       <li>
         <NavLink activeClassName="active" to='/about'>About</NavLink>
       </li>
@@ -35,7 +29,7 @@ function App() {
       </li>
       <li>
       <NavLink activeClassName="active" to='/posts'>Posts</NavLink>
-      </li>
+</li>
     </ul>
     </div>
    
@@ -46,16 +40,18 @@ function App() {
       </header>
         <Home />
       </Route >
-      {/*<Route path="/myApps" component={MyApps}>
-        <MyApps />
-</Route>*/}
+      <Route path="/myApps" component={AppContainer}>
+        <AppContainer />
+</Route>
       <Route path="/about" >
         <About />
       </Route>
       <Route path="/contact"  >
         <Contact />
       </Route>
-      <Route path="/posts" component={Posts} />
+      <Route path="/posts" component={Posts} >
+      <Posts />
+</Route>
       <Route  >
         <NotFound />
       </Route>

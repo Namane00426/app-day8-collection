@@ -49,3 +49,12 @@ header h1{
   font-size: 2em;
 }
 
+.app-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  background-color: #fff;
+  border-radius: 10px;
+  border: 0px #fff solid;
+}

@@ -1,5 +1,5 @@
 import { Link,Route, useRouteMatch} from "react-router-dom/cjs/react-router-dom"
-import Post from  './';
+import Post from  './Post';
 import posts from './postsData';
 
 

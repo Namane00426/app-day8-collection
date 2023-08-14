@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Freehand&family=Roboto:wght@300;500&display=swap');
+
+
+main {
+  height: 50vh;
+}
+
+/*selectbox*/
+.result {
+  height: 50px;
+  margin-top: 15px;
+}
+
+
+
+/*results*/
+
+button:hover {
+  filter: drop-shadow(0 0 1em #353535);
+  background-color: #353535;
+  color: whitesmoke;
+}
+
+
+.button {
+  padding: 2em;
+}
+
+.quote {
+  font-style: italic;
+  font-family: 'Freehand', cursive;
+  width: 50%;
+  margin: 20px auto;
+}
+
+
+
+
+
+
