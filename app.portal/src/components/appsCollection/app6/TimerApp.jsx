@@ -18,8 +18,10 @@ const TimerApp = () => {
   useEffect(() => {
     if(isRunning) {
       const timerId = setInterval(() => {
-        if(counter === 0) {
+        if(counter === 1) {
           alert.play();
+        }
+        if(counter === 0) {
           setIsRunning(false);
         }
       },1000)

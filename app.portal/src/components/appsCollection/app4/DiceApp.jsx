@@ -80,7 +80,7 @@ function resetDice() {
         </div>
         <div className='buttons'>
       { throwDice && !throwAgain ? (
-        <button onClick={showDice}>Stop the Dice</button>
+        <button onClick={showDice}>Stop!</button>
       ) : (
         <button onClick={startDice}>{throwAgain? 'Throw again!':'Throw the dice!'}</button>
       )}
