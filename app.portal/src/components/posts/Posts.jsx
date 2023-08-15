@@ -3,7 +3,7 @@ import Post from  './Post';
 import posts from './postsData';
 
 
-export const Posts = () =>  {
+const Posts = () =>  {
   //let history = useHistory();
   const {path, url } = useRouteMatch();
 

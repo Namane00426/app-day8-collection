@@ -65,7 +65,7 @@ const QuotesApp = () => {
     <>
     <main>
      
-      <h2>Simple Quote search App</h2>
+      <h2>Quote search App</h2>
      <select value={selected} onChange={onChange}>
         { categories.map((opt) => (<option key={opt} value={opt}>
           {opt}

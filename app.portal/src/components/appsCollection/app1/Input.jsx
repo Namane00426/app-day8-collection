@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {v4 as uuidv4 } from 'uuid';
 
-export const Input = (createTodo) => {
+const Input = (createTodo) => {
 
   const [value, setValue] = useState("");
 
@@ -33,3 +33,5 @@ export const Input = (createTodo) => {
   )
  
 }
+
+export default Input;

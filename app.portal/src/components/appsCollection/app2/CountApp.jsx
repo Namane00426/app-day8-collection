@@ -2,7 +2,7 @@ import {useState} from 'react';
 //import './CountApp.css';
 import Counter from './Counter';
 
-function CountApp() {
+const CountApp = () => {
 
 const [currentNum, setCurrentNum] = useState(0);
 const currentZero = 0;
@@ -36,7 +36,7 @@ const editNum = (value) => {
 
   return (
     <div className="App">
-      <h2>Simple Counter</h2>
+      <h2>Counter</h2>
       <Counter currentNum={currentNum} increment={increment} decrement={decrement} resetNum={resetNum} editNum={editNum}/>
      
     </div>

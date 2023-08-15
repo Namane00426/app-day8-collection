@@ -52,7 +52,7 @@ function DiceApp() {
   return (
     <>
      <div className='main'>
-      <h2>Simple dice app</h2>
+      <h2>Dice app</h2>
         <div className='dice'>
         <p className='box'>
         { throwDice === false ? (

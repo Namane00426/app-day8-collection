@@ -1,13 +1,19 @@
-import {Item} from './Item';
+//import {Item} from "./Item";
 
-export const List = (deleteTodo, todos) => {
+const List = (deleteTodo, todos) => {
+
+  
 
  return (
-  <div >
-    {todos.map((todo) => {
-      return <Item key={todo.id} deleteTodo={deleteTodo} todo={todo} 
-      />
+  <ul >
+    {todos.map(todo => {
+      <li key={todo.id} className='content item'>
+      <span>{todo.content}</span>
+      <button onClick={() => deleteTodo(todo.id)}>-</button>
+    </li>
     })}
-  </div>
+  </ul>
  )
 }
+
+export default List;

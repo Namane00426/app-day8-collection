@@ -5,7 +5,7 @@ import {
 
 import {posts} from './postsData';
  
-function Post() {
+const  Post = () =>  {
   const { id } = useParams();
   const post = posts.find((post) => post.id === Number(id));
 

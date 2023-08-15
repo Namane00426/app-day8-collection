@@ -1,7 +1,7 @@
 import {useState, useEffect, useRef} from 'react';
 import './TimerApp.css';
 
-function TimerApp() {
+const TimerApp = () => {
   const [counter, setCounter] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
   const [value, setValue] = useState(null);
@@ -61,7 +61,7 @@ function TimerApp() {
   return (
     <>
      <div className="main">
-     <h2>Simple Countdown</h2>
+     <h2>Countdown</h2>
       <div className='top'>
       <select name='seconds' id='second-select' onChange={(e) => setValue(e.target.value)}>
         {seconds.map((opt, i) => 

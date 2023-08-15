@@ -1,7 +1,7 @@
 import { useState, useRef} from 'react';
 import './StopWatchApp.css';
 
-function StopWatchApp() {
+const StopWatchApp = () => {
 const [count, setCount] = useState(0);
 const [started, setStarted] = useState(false);
 const intervalRef = useRef(null);
@@ -32,7 +32,7 @@ const intervalRef = useRef(null);
   return (
     <>
       <div className='stopWatch-main'>
-        <h2>Simple Stopwatch</h2>
+        <h2>Stopwatch</h2>
         <p>{hours}:{minutes}:{seconds}:{milliseconds}</p>
         {started ? (
           <button onClick={handlePause}>Pause</button> 

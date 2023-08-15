@@ -1,5 +1,5 @@
 
-export const Item =  (deleteTodo, {todo}) => {
+const Item =  (deleteTodo,  {todo}) => {
   return(
     <div key={todo.id} className='content item'>
       <span>{todo.content}</span>
@@ -7,3 +7,4 @@ export const Item =  (deleteTodo, {todo}) => {
     </div>
   )
 }
+export default Item;

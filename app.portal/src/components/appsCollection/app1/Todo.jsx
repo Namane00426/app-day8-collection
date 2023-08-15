@@ -1,17 +1,19 @@
 import {useState} from 'react';
-import {List} from './List';
-import {Input} from './Input';
+import List from './List';
+//import Item from './Item';
+import Input from './Input';
 
 export const Todo = () => {
 
-  const startTodo = [
-    { id: 1, content: "buy a milk" }, 
-    { id: 2, content: "take a walk" }
-  ];
+  //id, content
+const startTodo = [
+  { id: 1, content: "buy a milk" }, 
+  { id: 2, content: "take a walk" }
+];
+  
+const [todos, setTodos] = useState(startTodo);
 
-  const [todos, setTodos] = useState(startTodo);
-
-  const createTodo = (todo) => {
+const createTodo = (todo) => {
     const newTodo = [...todos, todo];
     setTodos(newTodo);
   }
@@ -24,10 +26,12 @@ export const Todo = () => {
   }
 
   return (
-    <div className='main'>
-      <h1>Simple TODO List</h1>
-      <List deleteTodo={deleteTodo} todos={todos}  />
+    <div className='todo-app'>
+      <h2>TODO List</h2>
+     <List deleteTodo={deleteTodo} todos={todos}  />
       <Input createTodo={createTodo}  />
     </div>
   )
 }
+
+export default Todo;
