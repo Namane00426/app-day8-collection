@@ -40,18 +40,14 @@ function App() {
       </header>
         <Home />
       </Route >
-      <Route path="/myApps" component={AppContainer}>
-        <AppContainer />
-</Route>
+      <Route path="/myApps" render={() => <AppContainer />} />
       <Route path="/about" >
         <About />
       </Route>
       <Route path="/contact"  >
         <Contact />
       </Route>
-      <Route path="/posts" component={Posts} >
-      <Posts />
-</Route>
+      <Route path="/posts" render={()=> <Posts />} />
       <Route  >
         <NotFound />
       </Route>

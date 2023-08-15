@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './DiceApp.css'
 import image from './assets/dice-goonz-goonz-dice.gif'
+import image2 from './assets/dice-roll.s.gif'
 import dice1 from './assets/dice-one.png'
 import dice2 from './assets/dice-2.png'
 import dice3 from './assets/dice-3.png'
@@ -13,19 +14,30 @@ function DiceApp() {
   //const [number2, setNumber2] = useState(1);
   const [throwDice, setThrowDice] = useState(false);
   const [thrownDiceImg, setThrownDiceImg] = useState('');
+  const [throwAgain, setThrowAgain] = useState(false);
 
+
+//1. start - throw the dice, 2. on throwoing 3. stop the dice
   function stopDice () {
-    setThrowDice(true);
     const randomNr1 = Math.floor(Math.random()* 6);
     //const randomNr2 = Math.floor(Math.random()* 6);
       setNumber1(1 + randomNr1);
     //setNumber2(1 + randomNr2);
+    return number1;
     }
-  
+
   function startDice () {
-    setThrowDice(false);
-    
-    switch (number1) {
+    setThrowDice(true);
+    setThrownDiceImg(image2);
+    setThrowAgain(false);
+  }
+
+  function showDice () {
+    setThrowDice(true);
+    stopDice();
+    setThrowAgain(true);
+
+    switch (number1) {     
       case 1:
         setThrownDiceImg(dice1); 
         break;
@@ -49,6 +61,12 @@ function DiceApp() {
   }
 }
 
+function resetDice() {
+  setThrowDice(false);
+  setThrownDiceImg(image);
+  setThrowAgain(false);
+}
+
   return (
     <>
      <div className='main'>
@@ -61,11 +79,13 @@ function DiceApp() {
        </p>
         </div>
         <div className='buttons'>
-      { throwDice ? (
-        <button onClick={startDice}>Throw the dice!</button>
+      { throwDice && !throwAgain ? (
+        <button onClick={showDice}>Stop the Dice</button>
       ) : (
-        <button onClick={stopDice}>Stop</button>
+        <button onClick={startDice}>{throwAgain? 'Throw again!':'Throw the dice!'}</button>
       )}
+        
+        <button onClick={resetDice}>Reset</button>
         </div>
      </div>
     </>

@@ -1,9 +1,9 @@
 import { useState,useEffect } from 'react'
 
-import './WheatherApp.css';
+import './WeatherApp.css';
 
-const WheatherApp = () => {
-  console.log(import.meta.env.MODE);
+const WeatherApp = () => {
+  
   const [value1, setValue1] = useState('');
   const [value2, setValue2] = useState('');
   const [location, setLocation] = useState({
@@ -39,7 +39,7 @@ const handleSubmit = () => {
   useEffect(() => {
    let options = {
     method: 'GET',
-    headers: {'X-Api-Key': import.meta.env.VITE_WHEATHER_KEY}
+    headers: {'X-Api-Key': import.meta.env.VITE_WEATHER_KEY}
    }
 
    
@@ -60,7 +60,7 @@ const handleSubmit = () => {
   return (
     <>
     <div className='wheather-app'>
-      <h2>Simple weather app</h2>
+      <h2>Weather app</h2>
       <p>Select your location</p>
       <div className='location'>
         <div >
@@ -68,6 +68,7 @@ const handleSubmit = () => {
         type='text'
         name={"country"}
         value={value1}
+        required
         placeholder='Country'
         onChange={(e) => setValue1(formatted(e.target.value))}
         />
@@ -75,6 +76,7 @@ const handleSubmit = () => {
         type='text'
         name={"city"}
         value={value2}
+        required
         placeholder='City'
         onChange={(e) => setValue2(formatted(e.target.value))}
         />
@@ -98,4 +100,4 @@ const handleSubmit = () => {
   )
 }
 
-export default WheatherApp;
+export default WeatherApp;
