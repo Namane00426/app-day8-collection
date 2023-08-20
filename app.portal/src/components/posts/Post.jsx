@@ -10,8 +10,8 @@ const  Post = () =>  {
   const post = posts.find((post) => post.id === Number(id));
 
   return (
-    <div>
-      <h2>{post.title}</h2>
+    <div className='w-1/2 bg-yellow-100 pt-5 divide-y divide-black-500'>
+      <h2 className="text-lg font-bold">{post.title}</h2>
       <p>{post.content}</p>
     </div>
     

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './DiceApp.css'
 import image from './assets/dice-goonz-goonz-dice.gif'
 import image2 from './assets/dice-roll.s.gif'
 import dice1 from './assets/dice-one.png'
@@ -74,18 +73,18 @@ function resetDice() {
         <div className='dice'>
         <p className='box'>
         { throwDice === false ? (
-           <img className='diceIMG' src={image} /> ): (<img className='diceIMG' src={thrownDiceImg} />)
+           <img className='rounded-md shadow-lg' src={image} /> ): (<img className='rounded-md shadow-lg' src={thrownDiceImg} />)
         }
        </p>
         </div>
         <div className='buttons'>
       { throwDice && !throwAgain ? (
-        <button onClick={showDice}>Stop!</button>
+        <button className='bg-gray-500 text-white rounded-md shadow-lg p-2 mt-2 hover:bg-red-400 hover:text-gray-700 hover:font-bold hover:shadow-md' onClick={showDice}>Stop!</button>
       ) : (
-        <button onClick={startDice}>{throwAgain? 'Throw again!':'Throw the dice!'}</button>
+        <button className='bg-green-500 font-bold text-white rounded-md shadow-lg p-2 mt-2 mr-1 ml-1 hover:bg-green-700 hover:text-white bold hover:shadow-md' onClick={startDice}>{throwAgain? 'Throw again!':'Throw the dice!'}</button>
       )}
         
-        <button onClick={resetDice}>Reset</button>
+        <button className='bg-gray-500 text-white rounded-md shadow-lg p-2 mt-2 mr-1 ml-1 hover:bg-blue-400 hover:text-white hover:font-bold hover:shadow-md' onClick={resetDice}>Reset</button>
         </div>
      </div>
     </>

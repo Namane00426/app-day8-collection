@@ -1,5 +1,4 @@
 import { useState, useRef} from 'react';
-import './StopWatchApp.css';
 
 const StopWatchApp = () => {
 const [count, setCount] = useState(0);
@@ -35,11 +34,11 @@ const intervalRef = useRef(null);
         <h2>Stopwatch</h2>
         <p>{hours}:{minutes}:{seconds}:{milliseconds}</p>
         {started ? (
-          <button onClick={handlePause}>Pause</button> 
+          <button className='bg-gray-500 text-white rounded-md shadow-lg p-2 mt-2 hover:bg-red-400 hover:text-gray-700 hover:font-bold hover:shadow-md' onClick={handlePause}>Pause</button> 
         ) : (
-          <button onClick={handleStart}>Start</button>
+          <button className='bg-green-500 font-bold text-white rounded-md shadow-lg p-2 mt-2 mr-1 ml-1 hover:bg-green-700 hover:text-white bold hover:shadow-md' onClick={handleStart}>Start</button>
         )}
-        <button onClick={handleReset}>Reset</button>
+        <button className='bg-gray-500 text-white rounded-md shadow-lg p-2 mt-2 mr-1 ml-1 hover:bg-blue-400 hover:text-white hover:font-bold hover:shadow-md' onClick={handleReset}>Reset</button>
       </div>
     </>
   )

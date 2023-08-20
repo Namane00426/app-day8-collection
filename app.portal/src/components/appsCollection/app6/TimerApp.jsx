@@ -1,5 +1,4 @@
 import {useState, useEffect, useRef} from 'react';
-import './TimerApp.css';
 
 const TimerApp = () => {
   const [counter, setCounter] = useState(null);
@@ -7,7 +6,7 @@ const TimerApp = () => {
   const [value, setValue] = useState(null);
   const intervalRef = useRef(null);
   const seconds = ['select ', 5, 10, 15, 30];
-  const  alert = new Audio('../public/alert.wav');
+  const  alert = new Audio('/alert.wav');
 
   const handleStart = () => {
     setCounter(value);
@@ -70,12 +69,12 @@ const TimerApp = () => {
          <option key={i} value={opt}>{opt}sec</option>
         )}
       </select>
-      <button onClick={handleStart}>Start</button>
+      <button className='bg-green-500 font-bold text-white rounded-md shadow-lg p-2 mt-2 mr-1 ml-1 hover:bg-green-700 hover:text-white bold hover:shadow-md' onClick={handleStart}>Start</button>
       </div>
       { counter > 0 ? (<h3>{counter}</h3>) : (<p> <span>Time is up ! Set new time again.</span></p>)}
-      <button onClick={handleStop}>Stop</button>
+      <button className='bg-red-400 text-white font-bold rounded-md shadow-lg p-2 mt-2 hover:bg-red-700 hover:text-white  hover:shadow-md' onClick={handleStop}>Stop</button>
       
-      <button onClick={handleReset}>Reset</button>
+      <button className='bg-gray-500 text-white rounded-md shadow-lg p-2 mt-2 mr-1 ml-1 hover:bg-blue-400 hover:text-white hover:font-bold hover:shadow-md' onClick={handleReset}>Reset</button>
       
       
      </div>

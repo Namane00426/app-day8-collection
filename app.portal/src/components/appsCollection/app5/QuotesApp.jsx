@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {useEffect, useState} from 'react';
-import './QuotesApp.css'
 
 
 const QuotesApp = () => {
@@ -74,7 +73,7 @@ const QuotesApp = () => {
      </select>
 
      <div className='result'>
-        { submitted ? (<p>Category: {quotes[0].category}</p>) : (<button onClick={() => selectQuote()}>Submit</button>)}
+        { submitted ? (<p>Category: {quotes[0].category}</p>) : (<button  className='bg-gray-500 text-white rounded-md shadow-lg p-2 mt-2 hover:bg-blue-400 hover:text-white hover:font-bold hover:shadow-md' onClick={() => selectQuote()}>Submit</button>)}
     </div>
     <div>
   <h2 className='quote'>{data[0]}</h2>

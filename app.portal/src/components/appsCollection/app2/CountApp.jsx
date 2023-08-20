@@ -1,5 +1,4 @@
 import {useState} from 'react';
-//import './CountApp.css';
 import Counter from './Counter';
 
 const CountApp = () => {
