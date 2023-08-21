@@ -48,7 +48,7 @@ await fetch(`http://api.spotify.com/v1/search?q=${searchKey}&type=artist,album&l
   const results = jsonResponse.artists.items;
   console.log(results)
   setSearchResults[results];
-  
+  console.log(results)
 })
 
 const handleAdd = (list) => {

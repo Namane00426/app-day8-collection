@@ -1,15 +1,15 @@
-import Track from './Track'
+import {Track} from './Track';
 
 
-const Tracklist = (handleAdd,  handleRemove, searchResults, yourPlayList) => {
+export const TrackList = (handleAdd, { searchResults}) => {
 
-  if(searchResults && handleAdd ) {
-    return <Track searchResults={searchResults} key={searchResults[0]} handleAdd={handleAdd} />
 
-  } else if (yourPlayList && handleRemove) {
-   return  <Track yourPlayList={yourPlayList} handleRemove={handleRemove}/>
-  }  
-
+  return (
+    <>
+   {searchResults.map(track => <Track key={track.id} handleAdd={handleAdd} track={track} />)}
+   </>
+  )
+  
 }
 
-export default Tracklist;
+export default TrackList;
