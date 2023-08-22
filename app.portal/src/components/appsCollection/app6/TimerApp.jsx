@@ -1,4 +1,5 @@
 import {useState, useEffect, useRef} from 'react';
+import timeOutSfx from '../../../assets/alert.wav';
 
 const TimerApp = () => {
   const [counter, setCounter] = useState(null);
@@ -6,7 +7,6 @@ const TimerApp = () => {
   const [value, setValue] = useState(null);
   const intervalRef = useRef(null);
   const seconds = ['select ', 5, 10, 15, 30];
-  const  alert = new Audio('/alert.wav');
 
   const handleStart = () => {
     setCounter(value);
@@ -14,11 +14,15 @@ const TimerApp = () => {
     
   }
 
+  function play(){
+    new Audio(timeOutSfx).play();
+  }
+
   useEffect(() => {
     if(isRunning) {
       const timerId = setInterval(() => {
         if(counter === 1) {
-          alert.play();
+          play();
         }
         if(counter === 0) {
           setIsRunning(false);
