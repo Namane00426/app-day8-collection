@@ -1,15 +1,15 @@
-import {TrackList} from './TrackList';
+// import {TrackList} from './TrackList';
 
-const SearchResults = (handleAdd,  searchResults) => {
+// export const SearchResults = (handleAdd,  searchResults) => {
 
 
- return (
-  <div>
-    <TrackList searchResults={searchResults} handleAdd={handleAdd} />
-    {/* <TrackList handleRemove={handleRemove} yourPlayList={yourPlayList} /> */}
-  </div>
- )
+//  return (
+//   <div>
+//     <TrackList searchResults={searchResults} handleAdd={handleAdd} />
+//     {/* <TrackList handleRemove={handleRemove} yourPlayList={yourPlayList} /> */}
+//   </div>
+//  )
   
-} 
+// } 
 
-export default SearchResults;
+// export default SearchResults;
