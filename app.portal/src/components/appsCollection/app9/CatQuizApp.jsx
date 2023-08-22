@@ -1,7 +1,7 @@
 import  {BiSolidCat} from 'react-icons/bi';
 import  {useState} from 'react'
 
-const CatQuizeApp = () => {
+const CatQuizApp = () => {
 
   //const defaultAnswer = ['Mix', 'American short hair', 'Sffinx'];
   //const [selectAnswers, setSelectAnswers] = useState(defaultAnswer);
@@ -48,7 +48,7 @@ const CatQuizeApp = () => {
 
   return (
     <>
-    <h2 className='text-xl mb-2'><BiSolidCat className='inline-block align-center mr-2 mb-2' />Cat Quize App</h2>
+    <h2 className='text-xl mb-2'><BiSolidCat className='inline-block align-center mr-2 mb-2' />Cat Quiz App</h2>
 
       <button onClick={fetchData}>Start!</button>
       <img src={url} className='w-56'/>
@@ -67,4 +67,4 @@ const CatQuizeApp = () => {
   )
 }
 
-export default CatQuizeApp;
+export default CatQuizApp;

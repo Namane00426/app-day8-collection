@@ -6,7 +6,7 @@ import WeatherApp from './appsCollection/app7/WeatherApp';
 //import CountApp from './appsCollection/app2/CountApp';
 //import TodoApp from './appsCollection/app1/TodoApp';
 import MusicApp from './appsCollection/app8/MusicApp';
-import CatQuizeApp from './appsCollection/app9/CatQuizeApp';
+import CatQuizApp from './appsCollection/app9/CatQuizeApp';
 
 const AppContainer = () => {
   return (
@@ -21,7 +21,7 @@ const AppContainer = () => {
     </div>
 
     <div className='bg-gray-100 shadow-lg p-8 m-5 w-72'>
-      <CatQuizeApp />
+      <CatQuizApp />
     </div>
 
       <div className='bg-gray-100 shadow-lg p-8 m-5 w-72 '>
