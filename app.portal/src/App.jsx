@@ -10,7 +10,7 @@ function App() {
  
   
  return(
-    <BrowserRouter>
+    <BrowserRouter >
     <nav className="flex w-full items-center justify-center bg-[#FBFBFB] px-10 py-2 align-middle text-neutral-500 shadow-lg "
   >
            <div className='ml-2'>
