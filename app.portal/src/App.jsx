@@ -26,7 +26,7 @@ function App() {
         >
             <li className="mb-0 pl-0 pr-5 text-neutral-500 transition duration-200 hover:text-purple-900 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none"
           >
-              <NavLink to='/myApps' className={({isActive}) => 
+              <NavLink to='/myapps' className={({isActive}) => 
             isActive ? "text-neutral-500" : "" }>My apps</NavLink>
             </li>
             <li className="mb-0 pl-0 pr-5 text-neutral-500 transition duration-200 hover:text-purple-900 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none"
