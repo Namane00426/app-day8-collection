@@ -1,12 +1,10 @@
 import {useState, useEffect} from 'react';
 //import {SearchResults} from './SearchResults';
-import {BsMusicNoteList } from 'react-icons/bs';
+import {BsMusicNoteList, BsTrash } from 'react-icons/bs';
 import {BiMessageSquareAdd, BiEditAlt, BiSave} from 'react-icons/bi';
 import {MdRemoveCircle} from 'react-icons/Md';
 
 const MusicApp = () => {
-
-    
 
     const CLIENT_ID = import.meta.env.VITE_MUSIC_APP_ID
     const REDIRECT_URI = 'http://localhost:5173/myApps/' 
@@ -17,7 +15,7 @@ const MusicApp = () => {
     const [searchKey, setSearchKey] = useState("");
     const [tracks, setTracks] = useState([]);
     const [yourPlayList, setYourPlayList] = useState([]);
-    const [newTitle, setNewTitle] = useState('Set new title here');
+    const [newTitle, setNewTitle] = useState('My list');
     const [value, setValue] = useState('');
 
 useEffect(() => {
@@ -48,16 +46,12 @@ await fetch(`http://api.spotify.com/v1/search?q=${searchKey}&type=track,album&li
     'Authorization': `Bearer ${token}`
 }}
 ).then(response => {
-  //console.log(response.ok);
   return response.json()
 }).then(jsonResponse=> {
-  //console.log(jsonResponse.tracks.items[0].album.id);
-  //console.log([jsonResponse.tracks])
   //console.log(jsonResponse.tracks.items[0].artists[0].name)
   let newList = [];
   jsonResponse.tracks.items.map(item => newList.push(item));
   setTracks(newList);
-  
   return tracks;
 })
 .catch(error => console.error(error))
@@ -91,26 +85,33 @@ await fetch(`http://api.spotify.com/v1/search?q=${searchKey}&type=track,album&li
     return yourPlayList;
   }
 
+  const handleReset = () => {
+    setSearchKey('');
+    setTracks([]);
+  }
+
 
   return (
   <div className='flex-box'> 
-    <h2 className='mb-1'><BsMusicNoteList className='inline-block align-center mr-2 mb-2'/>Music App</h2>
+    <h2 className='mb-1 text-xl'><BsMusicNoteList className='inline-block align-center mr-2 mt-0'/>Music App</h2>
     <p className='font-light mb-3'>Spotify music search</p>
-    <div >
+    <div className='mb-4'>
     {token? (
         <form onSubmit={searchArtists} >
-          <input type="text" onChange={(e) => setSearchKey(e.target.value)} placeholder='keyword' className='shadow-md'/>
-          <button className='bg-green-500 text-white font-bold rounded-md shadow-lg p-2 mt-2 hover:bg-green-700 hover:text-white hover:font-bold hover:shadow-md' type={"submit"}>Search</button>
+          <input type="text" value={searchKey} onChange={(e) => setSearchKey(e.target.value)} placeholder='Keyword' className='padding-1 text-center shadow-md'/>
+          <button className='bg-green-500 text-white font-bold rounded-md shadow-lg p-2 mt-2 ml-2 hover:bg-green-700 hover:text-white hover:font-bold hover:shadow-md' type={"submit"}>Search</button>
         </form>
-      ) : <p>Please login</p>}
-       { !token ? (<a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}  >Login to Spotify</a>) : <button className='text-gray-500 hover:text-gray-700 hover:underline mt-2' onClick={logout}>Logout</button>}
+      ) : <p></p>}
+       { !token ? (<a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}  className='font-bold text-green-500 hover:text-gray-700 underline'>Login to Spotify</a>) : <button className='text-sm text-gray-500 hover:text-gray-700 hover:underline ' onClick={logout}>Logout</button>}
       </div>
       
       <div className='flex justify-evenly'>
-      <div className='w-2/5'>
+      <div className='w-2/5 '>
       <ul className='text-center divide-y divide-gray-400'>
-        <h3 className='text-lx font-bold mb-2'>Search results</h3>
-       
+        <div className='inline-flex'>
+        <h3 className='text-lx font-bold text-green-500 mb-2'>Search results</h3>
+        <button className='ml-1 mb-1 text-gray-400 hover:text-gray-700' onClick={() => handleReset()}><BsTrash /></button>
+        </div>
         { tracks ? (tracks.map(track => {
           return (
           <li key={track.id} ><span className='font-medium leading-tight '>{track.name}</span> <br/>by {track.artists[0].name} 
@@ -119,9 +120,9 @@ await fetch(`http://api.spotify.com/v1/search?q=${searchKey}&type=track,album&li
         }
       </ul>
       </div>
-      <div className='w-2/5'>
-        {newTitle ? (<div className='flex justify-center' ><h3 className='text-lx font-bold mb-2'>{newTitle}</h3><button onClick={() => setNewTitle('')}><BiEditAlt className='ml-1'/></button></div>) : (<div className='flex justify-center bg-white border-2'>
-        <input  type='text'  placeholder='Set new title -> -> save' onChange={(e) => setValue(e.target.value)}/><BiSave className='ml-1 mt-1' onClick={() => setNewTitle(value)}/></div>)}
+      <div className='w-2/5 '>
+        {newTitle ? (<div className='flex justify-center' ><h3 className='text-lx font-bold mb-2'>{newTitle}</h3><button onClick={() => setNewTitle('')}><BiEditAlt className='ml-1 text-gray-400 hover:text-gray-700 mb-1'/></button></div>) : (<div className='flex justify-center bg-white border-2'>
+        <input  className='rounded-md text-center' type='text'  placeholder='Set new title -> -> save' onChange={(e) => setValue(e.target.value)}/><button onClick={() => setNewTitle(value)}><BiSave className='ml-3 text-lg text-gray-400 hover:text-gray-700' /></button></div>)}
       
       <ul className='text-center divide-y divide-gray-400'>
       { yourPlayList ? (yourPlayList.map(list => {
@@ -133,9 +134,6 @@ await fetch(`http://api.spotify.com/v1/search?q=${searchKey}&type=track,album&li
         </ul>
       </div>
 
-    {/* <div>
-      <SearchResults searchResults={searchResults} handleAdd={handleAdd} yourPlayList={yourPlayList} handleRemove={handleRemove}/>
-    </div> */}
     </div>
   </div>
   )
