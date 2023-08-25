@@ -4,7 +4,7 @@ import DiceApp from './appsCollection/app4/DiceApp';
 import StopWatchApp from './appsCollection/app3/StopWatchApp';
 import WeatherApp from './appsCollection/app7/WeatherApp';
 //import CountApp from './appsCollection/app2/CountApp';
-//import TodoApp from './appsCollection/app1/TodoApp';
+import TodoApp from './appsCollection/app1/TodoApp';
 import MusicApp from './appsCollection/app8/MusicApp';
 import CatQuizApp from './appsCollection/app9/CatQuizApp';
 
@@ -48,9 +48,9 @@ const AppContainer = () => {
       <CountApp />
 </div>*/}
 
-      {/*<div className='bg-gray-100 shadow-lg p-8 m-5 w-72'>
+      <div className='bg-gray-100 shadow-lg p-8 m-5 w-72'>
       <TodoApp />
-</div>*/}
+</div>
 
 
     </div>
