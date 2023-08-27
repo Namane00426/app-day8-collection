@@ -7,7 +7,7 @@ import {MdRemoveCircle} from 'react-icons/Md';
 const MusicApp = () => {
 
     const CLIENT_ID = import.meta.env.VITE_MUSIC_APP_ID
-    const REDIRECT_URI = 'https://namane00426.github.io/myApps' 
+    const REDIRECT_URI = 'https://namane00426.github.io/myapps' 
     const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
     const RESPONSE_TYPE = 'token'
 
