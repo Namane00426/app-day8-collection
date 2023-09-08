@@ -1,23 +1,14 @@
+import {BiMessageSquareAdd} from 'react-icons/bi';
 
+function Track({handleAdd, track}) {
 
-//  export const Track = (handleAdd,  track) => {
+return (
+    < >
+      <span className='font-medium leading-tight '>{track.name}</span> <br/>by {track.artists[0].name} 
 
-//     return (
-//       <>
-//       <div> 
-//       <li key={track[0]}> 
-//       <h3>{track[1]} by `&quot;` {track[2]}`&quot;` from Album {track[3]}</h3> 
-//       </li>
-//       <button onClick={() => handleAdd(track)}> + </button>
-//     </div> 
+    <button onClick={() => handleAdd([track.id, track.name, track.artists[0].name])}><BiMessageSquareAdd className='ml-2 text-gray-400 align-center hover:text-blue-500 ' /></button>
+    </>
+    )
+}
 
-//     {/* <div>
-//         <p>{yourPlayList}</p>
-//          <li key={yourPlayList[0]}><h3>{yourPlayList[1]} by `&quot;`{yourPlayList[2]}`&quot;`</h3></li><button onClick={() => handleRemove(yourPlayList[0])}> - </button>
-//     </div> */}
-//     </>
-//     )
-
-//   }
-
-//  export default Track;
+export default Track;

@@ -1,25 +1,19 @@
 import {useState, useEffect} from 'react';
-//import {SearchResults} from './SearchResults';
-import {BsMusicNoteList, BsTrash } from 'react-icons/bs';
-import {BiMessageSquareAdd, BiEditAlt, BiSave} from 'react-icons/bi';
-import {MdRemoveCircle} from 'react-icons/Md';
+import SearchResults from './SearchResults';
+import SearchBar from './SearchBar';
+import {authUrl, api_Url, search_Url} from './Spotify';
 
-const MusicApp = () => {
-
-    const CLIENT_ID = import.meta.env.VITE_MUSIC_APP_ID
-    const REDIRECT_URI = 'https://namane00426.github.io/myApps' 
-    const AUTH_ENDPOINT = 'https://accounts.spotify.com/authorize'
-    const RESPONSE_TYPE = 'token'
-
+function MusicApp() {
     const [token, setToken] = useState("");
     const [searchKey, setSearchKey] = useState("");
     const [tracks, setTracks] = useState([]);
     const [yourPlayList, setYourPlayList] = useState([]);
     const [newTitle, setNewTitle] = useState('My list');
     const [value, setValue] = useState('');
+    const [addUris, setAddUris] = useState([]);
 
 useEffect(() => {
-  const hash = window.location.hash;
+   const hash = window.location.hash;
   let token = window.localStorage.getItem("token");
   if(!token && hash){
     token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1];
@@ -28,7 +22,7 @@ useEffect(() => {
     window.localStorage.setItem("token", token);
     
   }
-  setToken(token);
+setToken(token);
 }, [])
 
 const logout = () => {
@@ -41,14 +35,14 @@ const logout = () => {
  //eslint-disable-next-line no-unused-vars
 const searchArtists = async (e) => {
   e.preventDefault();
-await fetch(`http://api.spotify.com/v1/search?q=${searchKey}&type=track,album&limit=8`, {
+  const searchUrl = `${api_Url}${search_Url}${searchKey}`
+await fetch(searchUrl, {
   headers: {
     'Authorization': `Bearer ${token}`
 }}
 ).then(response => {
   return response.json()
 }).then(jsonResponse=> {
-  //console.log(jsonResponse.tracks.items[0].artists[0].name)
   let newList = [];
   jsonResponse.tracks.items.map(item => newList.push(item));
   setTracks(newList);
@@ -57,31 +51,78 @@ await fetch(`http://api.spotify.com/v1/search?q=${searchKey}&type=track,album&li
 .catch(error => console.error(error))
 }
 
+const savePlayList = (newTitle, addUris) => {
+  if(!newTitle || !addUris) {
+    return;
+  }
+
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Content-type': 'application/json'
+  }
+
+  let userId; 
+  return fetch(`${api_Url}me`, {headers: headers}
+  ).then (response => response.json())
+  .then(jsonResponse => {
+    userId = jsonResponse.id;
+    return fetch(`${api_Url}users/${userId}/playlists`, 
+    {
+     headers: headers,
+     method: 'POST',
+     body: JSON.stringify({name: newTitle, public: false }),
+    }).then(response => response.json())
+    .then(jsonResponse => {
+      let playListId;
+      playListId = jsonResponse.id;
+      console.log(JSON.stringify({uris: addUris}));
+      return fetch(`${api_Url}users/${userId}/playlists/${playListId}/tracks`, 
+      {
+        headers: headers,
+        method: 'POST',
+        body: JSON.stringify({uris: addUris}),
+        json: true,
+      })
+    })
+  })
+    
+  }
 
   function addToNewPlayList(arr){
-
+    let newId = yourPlayList.length +1 ;
   const newPlayList = [...yourPlayList, {
-    "id": arr[0],
+    "id": newId,
     "name": arr[1],
-    "artistName": arr[2]
+    "artistName": arr[2],
+    "track_uri": `spotify:track:${arr[0]}`
    }]
 
   const uniqueList = Array.from(new Map(newPlayList.map((list) => [list.id, list])).values())
 
    setYourPlayList(uniqueList);
-  // console.log('playList', [yourPlayList])
    return yourPlayList;
  }
 
+ const addTracks_Spotify = () => {
+  let newUris = [];
+  yourPlayList.forEach(track => {
+    newUris.push(track.track_uri)
+  })
+  setAddUris(newUris)
+ }
+
+ const handleAddToSpotify = () => {
+  addTracks_Spotify();
+  savePlayList(newTitle, addUris);
+ }
+
  function handleAdd(arr){
-  console.log(arr);
   addToNewPlayList(arr);
   }
 
   const handleRemove = (id) => {
     const newPlaylist = yourPlayList.filter((list) => list.id !== id);
     setYourPlayList(newPlaylist);
-    console.log(newPlaylist)
     return yourPlayList;
   }
 
@@ -92,49 +133,16 @@ await fetch(`http://api.spotify.com/v1/search?q=${searchKey}&type=track,album&li
 
 
   return (
+    //search box
   <div className='flex-box'> 
-    <h2 className='mb-1 text-xl'><BsMusicNoteList className='inline-block align-center mr-2 mt-0'/>Music App</h2>
-    <p className='font-light mb-3'>Spotify music search</p>
-    <div className='mb-4'>
-    {token? (
-        <form onSubmit={searchArtists} >
-          <input type="text" value={searchKey} onChange={(e) => setSearchKey(e.target.value)} placeholder='Keyword' className='padding-1 text-center shadow-md'/>
-          <button className='bg-green-500 text-white font-bold rounded-md shadow-lg p-2 mt-2 ml-2 hover:bg-green-700 hover:text-white hover:font-bold hover:shadow-md' type={"submit"}>Search</button>
-        </form>
-      ) : <p></p>}
-       { !token ? (<a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}  className='font-bold text-green-500 hover:text-gray-700 underline'>Login to Spotify</a>) : <button className='text-sm text-gray-500 hover:text-gray-700 hover:underline ' onClick={logout}>Logout</button>}
-      </div>
-      
-      <div className='flex justify-evenly'>
-      <div className='w-2/5 '>
-      <ul className='text-center divide-y divide-gray-400'>
-        <div className='inline-flex'>
-        <h3 className='text-lx font-bold text-green-500 mb-2'>Search results</h3>
-        <button className='ml-1 mb-1 text-gray-400 hover:text-gray-700' onClick={() => handleReset()}><BsTrash /></button>
-        </div>
-        { tracks ? (tracks.map(track => {
-          return (
-          <li key={track.id} ><span className='font-medium leading-tight '>{track.name}</span> <br/>by {track.artists[0].name} 
-          <button onClick={() => handleAdd([track.id, track.name, track.artists[0].name])}><BiMessageSquareAdd className='ml-2 text-gray-400 align-center hover:text-blue-500 ' /></button></li>)
-        })) : (<p>no data</p>)
-        }
-      </ul>
-      </div>
-      <div className='w-2/5 '>
-        {newTitle ? (<div className='flex justify-center' ><h3 className='text-lx font-bold mb-2'>{newTitle}</h3><button onClick={() => setNewTitle('')}><BiEditAlt className='ml-1 text-gray-400 hover:text-gray-700 mb-1'/></button></div>) : (<div className='flex justify-center bg-white border-2'>
-        <input  className='rounded-md text-center' type='text'  placeholder='Set new title -> -> save' onChange={(e) => setValue(e.target.value)}/><button onClick={() => setNewTitle(value)}><BiSave className='ml-3 text-lg text-gray-400 hover:text-gray-700' /></button></div>)}
-      
-      <ul className='text-center divide-y divide-gray-400'>
-      { yourPlayList ? (yourPlayList.map(list => {
-          return (
-          <li key={list.id} ><span className='font-medium leading-tight '>{list.name}</span> <br/>by {list.artistName} 
-          <button onClick={() => handleRemove(list.id)}><MdRemoveCircle className='ml-2 text-gray-400 align-center hover:text-pink-500 ' /></button></li>)
-        })) : (<p></p>)
-        }
-        </ul>
-      </div>
+   <SearchBar 
+   token={token} searchArtists={searchArtists} searchKey={searchKey} setSearchKey={setSearchKey} logout={logout} authUrl={authUrl}/>
 
-    </div>
+      
+    {/**search results  */}
+    <SearchResults 
+    handleReset={handleReset} handleAdd={handleAdd} newTitle={newTitle} setNewTitle={setNewTitle} value={value} setValue={setValue} tracks={tracks} yourPlayList={yourPlayList} handleRemove={handleRemove} handleAddToSpotify={handleAddToSpotify}/>
+     
   </div>
   )
 

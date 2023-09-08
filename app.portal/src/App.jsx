@@ -55,7 +55,7 @@ function App() {
       </header>
         <Home />
       </Route >
-      <Route path="/myApps" render={() => <AppContainer />} />
+      <Route path="/myapps" render={() => <AppContainer />} />
       <Route path="/about" >
         <About />
       </Route>

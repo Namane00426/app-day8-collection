@@ -1,15 +1,17 @@
-//  import {Track} from './Track';
+import Track from './Track'
 
+function TrackList({tracks, handleAdd}){
 
-//  export const TrackList = (handleAdd, { searchResults}) => {
- 
+  return (
+        <>
+        { tracks ? (tracks.map(track => {
+          return (
+          <li key={track.id} >
+            <Track track={track} handleAdd={handleAdd}/>
+          </li>)
+        })) : (<p>no data</p>)}
+        </>
+  )
+}
 
-//    return (
-//      <>
-//     {searchResults.map(track => <Track key={track.id} handleAdd={handleAdd} track={track} />)}
-//     </>
-//    )
-  
-//  }
-
-//  export default TrackList;
+export default TrackList;
